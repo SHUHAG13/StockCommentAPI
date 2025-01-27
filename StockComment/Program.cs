@@ -1,6 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
 using StockComment.Data;
+using StockComment.Interfaces;
+using StockComment.Repository;
 
 namespace StockComment
 {
@@ -18,6 +20,7 @@ namespace StockComment
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(options => 
             options.UseSqlServer(builder.Configuration.GetConnectionString("Defaultconnection")));
+            builder.Services.AddScoped<IStockInterface, StockRepository>();
 
             var app = builder.Build();
 
