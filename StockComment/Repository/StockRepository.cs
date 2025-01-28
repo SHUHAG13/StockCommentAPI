@@ -44,7 +44,6 @@ namespace StockComment.Repository
             existingStock.Industry=stock.Industry;
             existingStock.CompanyName = stock.CompanyName;
             existingStock.LastDiv=stock.LastDiv;
-
             await _context.SaveChangesAsync();
             return existingStock;
 

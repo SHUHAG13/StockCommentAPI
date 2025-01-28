@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using StockComment.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using StockComment.Interfaces;
 using StockComment.Mappers;
 using StockComment.Models.Dtos;
-
 namespace StockComment.Controllers
 {
     [Route("api/[controller]")]
@@ -25,6 +21,7 @@ namespace StockComment.Controllers
             var stockall=stocks.Select(s=>s.ToStockDto());
             return Ok(stocks);
         }
+
         
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -37,6 +34,7 @@ namespace StockComment.Controllers
             return Ok(stock.ToStockDto());
         }
 
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateStockRequestDto stockDto)
         {
@@ -45,6 +43,7 @@ namespace StockComment.Controllers
             return CreatedAtAction(nameof(GetById), new { id = stockModel.Id },stockModel.ToStockDto());
         }
 
+
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStockRequestDto updateDto)
         {
@@ -52,10 +51,10 @@ namespace StockComment.Controllers
             if (stockModel == null)
             {
                 return NotFound();
-
             }
             return Ok(stockModel.ToStockDto());
         }
+
 
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)

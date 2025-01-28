@@ -1,7 +1,5 @@
 ﻿using StockComment.Models;
 using StockComment.Models.Dtos;
-using System.Runtime.CompilerServices;
-
 namespace StockComment.Mappers
 {
     public  static class StockMapper
@@ -22,6 +20,7 @@ namespace StockComment.Mappers
             };
 
         }
+
         public static Stock ToStockFromCreateDto(this CreateStockRequestDto stockModel)
         {
             return new Stock

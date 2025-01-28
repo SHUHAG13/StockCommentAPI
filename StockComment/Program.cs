@@ -21,6 +21,7 @@ namespace StockComment
             builder.Services.AddDbContext<ApplicationDbContext>(options => 
             options.UseSqlServer(builder.Configuration.GetConnectionString("Defaultconnection")));
             builder.Services.AddScoped<IStockInterface, StockRepository>();
+            builder.Services.AddScoped<ICommentInterface, CommentRepository>();
 
             var app = builder.Build();
 
