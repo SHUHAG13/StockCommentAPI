@@ -9,5 +9,6 @@ namespace StockComment.Interfaces
         Task<Stock> CreateAsync(Stock stock);
         Task<Stock> UpdateAsync(int id,UpdateStockRequestDto stock);
         Task<Stock> Delete(int id);
+        Task<bool> StockExist(int id);
     }
 }

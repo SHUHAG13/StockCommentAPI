@@ -16,14 +16,13 @@ namespace StockComment.Mappers
             };
         }
 
-        public static Comment ToCommentFromCreateDto(this CreateCommentRequestDto createCommentDto)
+        public static Comment ToCommentFromCreateDto(this CreateCommentRequestDto createCommentDto,int stockId)
         {
             return new Comment
             {
                 Title = createCommentDto.Title,
                 Content = createCommentDto.Content,
-                CreatedOn = createCommentDto.CreatedOn,
-                StockId = createCommentDto.StockId,
+                StockId = stockId
             };
         }
     }

@@ -22,6 +22,12 @@ namespace StockComment
             options.UseSqlServer(builder.Configuration.GetConnectionString("Defaultconnection")));
             builder.Services.AddScoped<IStockInterface, StockRepository>();
             builder.Services.AddScoped<ICommentInterface, CommentRepository>();
+            builder.Services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+                });
 
             var app = builder.Build();
 
