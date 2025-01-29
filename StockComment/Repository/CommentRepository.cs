@@ -41,8 +41,7 @@ namespace StockComment.Repository
             }
             existingComment.Title = commentModel.Title;
             existingComment.Content = commentModel.Content;
-            existingComment.CreatedOn = commentModel.CreatedOn;
-            existingComment.StockId = commentModel.StockId;
+           
             await _context.SaveChangesAsync();
             return existingComment;
         }

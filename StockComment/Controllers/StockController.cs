@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StockComment.Helpers;
 using StockComment.Interfaces;
 using StockComment.Mappers;
 using StockComment.Models.Dtos;
@@ -15,9 +16,13 @@ namespace StockComment.Controllers
         }
         
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery]QueryObject query)
         {
-            var stocks = await _repo.GetAllAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var stocks = await _repo.GetAllAsync(query);
             var stockall=stocks.Select(s=>s.ToStockDto());
             return Ok(stocks);
         }
@@ -26,6 +31,10 @@ namespace StockComment.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var stock = await _repo.GetByIdAsync(id);
             if (stock == null)
             {
@@ -38,6 +47,10 @@ namespace StockComment.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateStockRequestDto stockDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var stockModel = stockDto.ToStockFromCreateDto();
             await _repo.CreateAsync(stockModel);
             return CreatedAtAction(nameof(GetById), new { id = stockModel.Id },stockModel.ToStockDto());
@@ -47,6 +60,10 @@ namespace StockComment.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStockRequestDto updateDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var stockModel = await _repo.UpdateAsync(id, updateDto);
             if (stockModel == null)
             {
@@ -59,6 +76,10 @@ namespace StockComment.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var stockModel = await _repo.Delete(id);
             if(stockModel==null)
             {
